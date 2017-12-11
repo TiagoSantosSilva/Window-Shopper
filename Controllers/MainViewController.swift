@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         let calculateButton = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 60))
         calculateButton.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
@@ -27,10 +28,6 @@ class MainViewController: UIViewController {
         
         wageTxt.inputAccessoryView = calculateButton
         itemPriceTxt.inputAccessoryView = calculateButton
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        
-        view.addGestureRecognizer(tap)
     }
 
     @IBAction func clearCalculatorPressed(_ sender: Any) {
@@ -57,10 +54,6 @@ class MainViewController: UIViewController {
         hoursLbl.isHidden = false
         
         resultLbl.text = String(result)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 
