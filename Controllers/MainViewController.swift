@@ -27,6 +27,10 @@ class MainViewController: UIViewController {
         
         wageTxt.inputAccessoryView = calculateButton
         itemPriceTxt.inputAccessoryView = calculateButton
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        
+        view.addGestureRecognizer(tap)
     }
 
     @IBAction func clearCalculatorPressed(_ sender: Any) {
@@ -53,6 +57,10 @@ class MainViewController: UIViewController {
         hoursLbl.isHidden = false
         
         resultLbl.text = String(result)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
