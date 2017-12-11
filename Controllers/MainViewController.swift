@@ -44,6 +44,9 @@ class MainViewController: UIViewController {
         guard let priceTxtAsDouble = Double(priceTxt) else { return }
         
         let result = Wage.getHours(forWage: wageTxtAsDouble, andPrice: priceTxtAsDouble)
+        
+        result > 1 ? (hoursLbl.text = "hours") : (hoursLbl.text = "hour")
+        
         view.endEditing(true)
         
         resultLbl.isHidden = false
