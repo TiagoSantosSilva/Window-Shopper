@@ -13,6 +13,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var wageTxt: CurrencyTextField!
     @IBOutlet weak var itemPriceTxt: CurrencyTextField!
     
+    @IBOutlet weak var resultLbl: UILabel!
+    @IBOutlet weak var hoursLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,13 +29,27 @@ class MainViewController: UIViewController {
         itemPriceTxt.inputAccessoryView = calculateButton
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func clearCalculatorPressed(_ sender: Any) {
+        resultLbl.isHidden = true
+        hoursLbl.isHidden = true
+        wageTxt.text = ""
+        itemPriceTxt.text = ""
     }
     
     @objc func calculate() {
-        print("We got here.")
+        guard let wageTxt = wageTxt.text else { return }
+        guard let priceTxt = itemPriceTxt.text else { return }
+        
+        guard let wageTxtAsDouble = Double(wageTxt) else { return }
+        guard let priceTxtAsDouble = Double(priceTxt) else { return }
+        
+        let result = Wage.getHours(forWage: wageTxtAsDouble, andPrice: priceTxtAsDouble)
+        view.endEditing(true)
+        
+        resultLbl.isHidden = false
+        hoursLbl.isHidden = false
+        
+        resultLbl.text = String(result)
     }
 }
 
